@@ -1,0 +1,88 @@
+[gd_scene load_steps=9 format=3 uid="uid://bknx5waew7h7a"]
+
+[ext_resource type="Script" path="res://system/game_manager.gd" id="1_aa60n"]
+[ext_resource type="PackedScene" uid="uid://cyk67kv73er43" path="res://player/player.tscn" id="1_xspk7"]
+[ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="2_armmp"]
+[ext_resource type="PackedScene" uid="uid://doex6bpslr5f1" path="res://sheep/sheep.tscn" id="4_yegb0"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gm8k2"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_0xu5t"]
+sky_material = SubResource("ProceduralSkyMaterial_gm8k2")
+
+[sub_resource type="Environment" id="Environment_recut"]
+background_mode = 2
+sky = SubResource("Sky_0xu5t")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gmg0p"]
+render_priority = 0
+shader = ExtResource("2_armmp")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 1
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[node name="Root" type="Node3D"]
+script = ExtResource("1_aa60n")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_recut")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_xspk7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.405, 5.24039, -0.324467)
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(40, 1, 40)
+
+[node name="Sheep" parent="." node_paths=PackedStringArray("scared_of") instance=ExtResource("4_yegb0")]
+transform = Transform3D(-0.93593, 0, -0.352185, 0, 1, 0, 0.352185, 0, -0.93593, -3.6095, 2.95099, 0.286947)
+scared_of = [NodePath("../Player")]
+
+[node name="Sheep2" parent="." node_paths=PackedStringArray("scared_of") instance=ExtResource("4_yegb0")]
+transform = Transform3D(0.956029, 0, 0.293273, 0, 1, 0, -0.293273, 0, 0.956029, 4.22682, 2.14015, -5.19702)
+scared_of = [NodePath("../Player")]
+
+[node name="Sheep3" parent="." node_paths=PackedStringArray("scared_of") instance=ExtResource("4_yegb0")]
+transform = Transform3D(-0.304432, 0, -0.952534, 0, 1, 0, 0.952534, 0, -0.304432, 1.50049, 3.32812, 2.51548)
+scared_of = [NodePath("../Player")]
+
+[node name="Sheep4" parent="." node_paths=PackedStringArray("scared_of") instance=ExtResource("4_yegb0")]
+transform = Transform3D(-0.755076, 0, 0.655637, 0, 1, 0, -0.655637, 0, -0.755076, -2.76971, 3.17155, -4.07846)
+scared_of = [NodePath("../Player")]
+
+[node name="Sheep5" parent="." node_paths=PackedStringArray("scared_of") instance=ExtResource("4_yegb0")]
+transform = Transform3D(0.124034, 0, 0.992278, 0, 1, 0, -0.992278, 0, 0.124034, 0.564565, 3.32812, -6.7248)
+scared_of = [NodePath("../Player")]
+
+[node name="Sheep6" parent="." node_paths=PackedStringArray("scared_of") instance=ExtResource("4_yegb0")]
+transform = Transform3D(0.801911, 0, -0.597443, 0, 1, 0, 0.597443, 0, 0.801911, 4.87729, 3.32812, -0.165298)
+scared_of = [NodePath("../Player")]
