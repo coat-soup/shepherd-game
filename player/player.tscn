@@ -1,13 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://cyk67kv73er43"]
+[gd_scene load_steps=8 format=3 uid="uid://cyk67kv73er43"]
 
-[ext_resource type="Script" path="res://player/Player.gd" id="1_u3ln2"]
+[ext_resource type="Script" path="res://player/player_movement.gd" id="1_u3ln2"]
+[ext_resource type="Script" path="res://player/dog_controller.gd" id="2_bi21y"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_765p8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ybx0f"]
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_hme53"]
+bottom_radius = 0.0
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cuaye"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0.713726, 0.945098, 0.631373)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_65mbg"]
+height = 0.001
+
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1605, 0)
+collision_mask = 3
 script = ExtResource("1_u3ln2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -21,3 +35,22 @@ shape = SubResource("CapsuleShape3D_ybx0f")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.732802, 0)
 
 [node name="Camera" type="Camera3D" parent="CameraPivot"]
+
+[node name="DogController" type="Node" parent="." node_paths=PackedStringArray("cam")]
+script = ExtResource("2_bi21y")
+cam = NodePath("../CameraPivot/Camera")
+
+[node name="Marker" type="Node3D" parent="DogController"]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0)
+
+[node name="Arrow" type="MeshInstance3D" parent="DogController/Marker"]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, -1, -8.74228e-08)
+mesh = SubResource("CylinderMesh_hme53")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_cuaye")
+
+[node name="Circle" type="MeshInstance3D" parent="DogController/Marker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.157355, -1.37564e-08)
+mesh = SubResource("CylinderMesh_65mbg")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_cuaye")

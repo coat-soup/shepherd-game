@@ -22,6 +22,10 @@ func _ready():
 	for s in get_tree().get_nodes_in_group("sheep"):
 		if s != self:
 			sheep.append(s as Sheep)
+			
+	var dog = get_tree().get_first_node_in_group("dog")
+	if dog != null:
+		scared_of.append(dog)
 
 func _physics_process(delta: float) -> void:
 	# gravity

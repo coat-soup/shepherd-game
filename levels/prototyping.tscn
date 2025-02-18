@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bknx5waew7h7a"]
+[gd_scene load_steps=11 format=3 uid="uid://bknx5waew7h7a"]
 
 [ext_resource type="Script" path="res://system/game_manager.gd" id="1_aa60n"]
 [ext_resource type="PackedScene" uid="uid://cyk67kv73er43" path="res://player/player.tscn" id="1_xspk7"]
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="2_armmp"]
 [ext_resource type="PackedScene" uid="uid://doex6bpslr5f1" path="res://sheep/sheep.tscn" id="4_yegb0"]
+[ext_resource type="PackedScene" uid="uid://cupbh2pwx2go0" path="res://dog/dog.tscn" id="5_avyqv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gm8k2"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -17,6 +18,10 @@ background_mode = 2
 sky = SubResource("Sky_0xu5t")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_ks0d3"]
+vertices = PackedVector3Array(-19.5, 0.5, -19.5, -19.5, 0.5, 19.5, 19.5, 0.5, 19.5, 19.5, 0.5, -19.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gmg0p"]
 render_priority = 0
@@ -57,7 +62,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.405, 5.24039, -0.324467)
 
 [node name="World" type="Node3D" parent="."]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="World"]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="World"]
+navigation_mesh = SubResource("NavigationMesh_ks0d3")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World/NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 material_override = SubResource("ShaderMaterial_gmg0p")
 use_collision = true
@@ -86,3 +94,6 @@ scared_of = [NodePath("../Player")]
 [node name="Sheep6" parent="." node_paths=PackedStringArray("scared_of") instance=ExtResource("4_yegb0")]
 transform = Transform3D(0.801911, 0, -0.597443, 0, 1, 0, 0.597443, 0, 0.801911, 4.87729, 3.32812, -0.165298)
 scared_of = [NodePath("../Player")]
+
+[node name="Dog" parent="." instance=ExtResource("5_avyqv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.7719, 1.07591, -13.2556)
