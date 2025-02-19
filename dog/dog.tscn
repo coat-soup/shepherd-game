@@ -1,12 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cupbh2pwx2go0"]
+[gd_scene load_steps=4 format=3 uid="uid://cupbh2pwx2go0"]
 
 [ext_resource type="Script" path="res://dog/dog.gd" id="1_2gpl8"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_r1t5h"]
-height = 1.2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_udjaw"]
-albedo_color = Color(0.483711, 0.630901, 0.583762, 1)
+[ext_resource type="PackedScene" uid="uid://hfnymams6jkc" path="res://dog/dog.glb" id="2_fh1ml"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1ldgy"]
 height = 1.2
@@ -16,11 +11,11 @@ collision_mask = 3
 script = ExtResource("1_2gpl8")
 nav_agent = NodePath("NavigationAgent3D")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_r1t5h")
-surface_material_override/0 = SubResource("StandardMaterial3D_udjaw")
+[node name="dog" parent="." instance=ExtResource("2_fh1ml")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.526984, 0)
 shape = SubResource("CapsuleShape3D_1ldgy")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

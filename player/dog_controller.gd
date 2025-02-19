@@ -19,7 +19,7 @@ func _ready() -> void:
 		dog.nav_agent.target_reached.connect(hide_marker)
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("command_dog"):
 		holding_marker = true
 		marker.visible = true
@@ -28,7 +28,7 @@ func _input(event: InputEvent) -> void:
 		dog.update_target_position(marker_position)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 		if holding_marker:
 			raycast_marker()
 

@@ -6,7 +6,7 @@ class_name Dog
 
 @export var speed := 6.0
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var cur_pos = global_position
 	var next_pos = nav_agent.get_next_path_position()
 	var vel = (next_pos - cur_pos).normalized() * speed

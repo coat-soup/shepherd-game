@@ -30,7 +30,7 @@ var debug_mode = false
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if Input.is_key_pressed(KEY_SEMICOLON):
 		debug_mode = !debug_mode
 		if debug_mode:
@@ -44,6 +44,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		rotate_y(-event.relative.x * sensetivity)
 		camera_pivot.rotate_x(-event.relative.y * sensetivity)
 		camera_pivot.rotation.x = clamp(camera_pivot.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+
 
 func _physics_process(delta: float) -> void:	
 	# gravity

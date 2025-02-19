@@ -71,7 +71,7 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 shadow_enabled = true
 
 [node name="Longboat" parent="World" node_paths=PackedStringArray("ui") instance=ExtResource("7_vq2rx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 19)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.63524, 20.5228)
 ui = NodePath("../../UI")
 
 [node name="Entities" type="Node3D" parent="."]
@@ -101,7 +101,7 @@ transform = Transform3D(0.801911, 0, -0.597443, 0, 1, 0, 0.597443, 0, 0.801911, 
 scared_of = [NodePath("../Player")]
 
 [node name="Dog" parent="Entities" instance=ExtResource("5_avyqv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.7719, 1.07591, -13.2556)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.7719, 0.0287485, -13.2556)
 
 [node name="Player" parent="Entities" instance=ExtResource("1_xspk7")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -11.405, 5.24039, -0.324467)
