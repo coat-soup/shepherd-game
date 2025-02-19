@@ -29,6 +29,7 @@ enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
 sheep=""
 player=""
 dog=""
+ui=""
 
 [input]
 

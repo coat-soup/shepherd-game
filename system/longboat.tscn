@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcdbfpm1tng0a"]
+
+[ext_resource type="Script" path="res://system/longboat.gd" id="1_nyeri"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_c4slu"]
+size = Vector3(6, 1, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cwrke"]
+albedo_color = Color(0.211179, 0.0617061, 2.40654e-08, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hph6m"]
+size = Vector3(6, 1, 2)
+
+[node name="Longboat" type="Node3D" node_paths=PackedStringArray("trigger_area")]
+script = ExtResource("1_nyeri")
+trigger_area = NodePath("Area3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_c4slu")
+surface_material_override/0 = SubResource("StandardMaterial3D_cwrke")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_hph6m")

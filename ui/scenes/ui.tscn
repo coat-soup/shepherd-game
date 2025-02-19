@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl5wjacv48x8p"]
+
+[ext_resource type="Script" path="res://ui/scripts/hud.gd" id="1_berio"]
+[ext_resource type="Script" path="res://ui/scripts/ui.gd" id="1_np0it"]
+
+[node name="UI" type="Control" node_paths=PackedStringArray("hud") groups=["ui"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_np0it")
+hud = NodePath("HUD")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_berio")
+
+[node name="SheepCounter" type="Label" parent="HUD"]
+layout_mode = 0
+offset_left = 915.0
+offset_right = 975.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 50
+text = "0 sheep"
+horizontal_alignment = 1

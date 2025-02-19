@@ -2,6 +2,8 @@ extends CharacterBody3D
 
 class_name Sheep
 
+signal sheep_disabled
+
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 
 @export var speed := 1.0
@@ -18,10 +20,14 @@ var walk_dir := Vector3()
 
 var sheep : Array[Sheep]
 
+
 func _ready():
 	for s in get_tree().get_nodes_in_group("sheep"):
 		if s != self:
-			sheep.append(s as Sheep)
+			s = s as Sheep
+			sheep.append(s)
+			s.sheep_disabled.connect(on_other_sheep_disabled)
+			
 			
 	var dog = get_tree().get_first_node_in_group("dog")
 	if dog != null:
@@ -90,3 +96,12 @@ func follow_other_sheep():
 		walk_dir += (center - global_position).normalized() * centering_factor
 	
 	walk_dir = walk_dir.normalized()
+
+
+func on_other_sheep_disabled(s : Sheep):
+	sheep.remove_at(sheep.find(s))
+
+
+func disable_and_delete():
+	sheep_disabled.emit(self)
+	queue_free()
